@@ -24,9 +24,10 @@ let isAlive = setInterval(() => {
     // analisar se ambos se tocam
     if (cactusLeft < 30 && cactusLeft > 0 && dinoTop >= 140){
         let pontosobtidos = document.getElementById("pontos")
-        if (pontosobtidos > 2000) {
+
+        if (Number(pontosobtidos.innerHTML) > 2000) {
             alert("Nossaaaa!!! que viciada kkkkk, nino caiu de boca no abacaxi com " + pontosobtidos.innerHTML + " pontos!");
-        }else if(pontosobtidos == 0){
+        }else if(Number(pontosobtidos.innerHTML) == 0){
             alert("Vixe, não pode ver um abacaxi que já cai de boca? Você conseguiu 0 pontos kkkkk")
         }else{
             alert("Eita, o nino caiu no abacaxi... Sua pontuação foi " + pontosobtidos.innerHTML + " pontos!");
