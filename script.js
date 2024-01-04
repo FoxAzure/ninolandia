@@ -22,9 +22,16 @@ let isAlive = setInterval(() => {
     let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"));
 
     // analisar se ambos se tocam
-    if (cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 150){
-        alert("Vixe, game over :(");
-        document.body.innerHTML = '<h1 class="game-over""> Atualize a página e jogue novamente </h1>'; // criando título ao final do jogo
+    if (cactusLeft < 30 && cactusLeft > 0 && dinoTop >= 140){
+        let pontosobtidos = document.getElementById("pontos")
+        if (pontosobtidos > 2000) {
+            alert("Nossaaaa!!! que viciada kkkkk, nino caiu de boca no abacaxi com " + pontosobtidos.innerHTML + " pontos!");
+        }else if(pontosobtidos == 0){
+            alert("Vixe, não pode ver um abacaxi que já cai de boca? Você conseguiu 0 pontos kkkkk")
+        }else{
+            alert("Eita, o nino caiu no abacaxi... Sua pontuação foi " + pontosobtidos.innerHTML + " pontos!");
+        }
+    
         location.reload()
     }
     setTimeout(DezSegundos, 1000);
