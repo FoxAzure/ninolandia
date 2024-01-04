@@ -1,0 +1,61 @@
+// Variáveis de jogo
+let score = 0;
+let gameSpeed = 2;
+let isJumping = false;
+let isGameOver = false;
+
+// Elementos do jogo
+const game = document.getElementById('game');
+const player = document.getElementById('player');
+const obstacle = document.getElementById('obstacle');
+
+// Função de apertar a tecla de espaço para pular
+function jump() {
+if (player.classList != 'jump') {
+player.classList.add('jump');
+}
+setTimeout(function() {
+player.classList.remove('jump');
+}, 300);
+}
+
+// Função de verificar colisão entre jogador e obstáculo
+function checkCollision() {
+let playerTop = parseInt(window.getComputedStyle(player).getPropertyValue('top'));
+let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
+if (obstacleLeft < 50 && obstacleLeft > 0 && playerTop >= 150) {
+endGame();
+} else {
+score++;
+document.getElementById('score').innerHTML = 'Score: ' + score;
+if (score % 500 === 0) {
+gameSpeed++;
+}
+}
+}
+
+// Função que finaliza o jogo
+function endGame() {
+isGameOver = true;
+clearInterval(gameTimer);
+document.getElementById('game-over').innerHTML = 'Game Over';
+}
+
+// Função de atualização do jogo
+function update() {
+if (!isGameOver) {
+let obstacleLeft = parseInt(window.getComputedStyle(obstacle).getPropertyValue('left'));
+obstacle.style.left = obstacleLeft - gameSpeed + 'px';
+checkCollision();
+}
+}
+
+// Evento de apertar a tecla de espaço para pular
+document.addEventListener('keydown', function(event) {
+if (event.code === 'Space' && !isJumping) {
+jump();
+}
+});
+
+// Loop principal do jogo
+let gameTimer = setInterval(update, 10);
